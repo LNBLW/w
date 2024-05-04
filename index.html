@@ -1,0 +1,129 @@
+<html lang="en" xml:lang="en">
+<head>
+
+  <script type="text/javascript">
+
+    function open_file()
+    {
+      document.getElementById('fileSelect').addEventListener("click",(e)=>{document.getElementById('fileElem').click();},false,);
+    }
+
+    function show_sep(select)
+    {
+      document.getElementById('sep').style.display = select.value=='csv' ? "inline-block" : "none";
+    } 
+
+    function show_time()
+    {
+      document.getElementById('sep').style.display = "none";
+      document.getElementById('time').style.display = "inline-block";
+    } 
+    
+    function resize(event)
+    {
+      W = document.body.clientWidth-32;
+      H = document.body.clientHeight-280;
+      document.getElementById('tela').style.width = W
+      document.getElementById('text').style.width = W+16;
+      document.getElementById('tela').style.height = W>H ? H : W;
+    }
+
+    window.addEventListener('load', resize);
+    window.addEventListener('resize', resize);
+
+</script>  
+
+  <style>
+    button
+    {
+      font-size:17px;
+      font-weight: bold;
+      color:blue;
+    }
+    input
+    {
+      font-size:17px;
+      font-weight: bold;
+      color:blue;
+    }
+    select
+    {
+      font-size:19px;
+      font-weight: bold;
+      color:blue;
+    }
+
+  </style>
+
+</head>
+
+<form name="Arquivo" action = "/upload" method="POST" enctype="multipart/form-data" style="display:inline-block">
+  <input type="file" id="fileElem" name="file" style="display:none"/>
+  <button title="Open File" id="fileSelect" type="button" onclick="open_file(this)">Open</button>
+  &nbsp;
+  <input title="Submit File" id="submit" type="submit" value="Submit"/>
+  &nbsp;
+</form>
+
+<form action = "/listar" method="POST" style="display:inline-block" onclick="show_time(this)">
+    <input title="List File" type="submit" value="List"/>
+    &nbsp; 
+  </form>
+
+<form action = "/executar" method="POST" style="display:inline-block" onclick="show_time(this)">
+  <input title="Run File" type="submit" value="Run" />
+  &nbsp; 
+  </form>
+
+<form action = "/limpar" method="POST" style="display:inline-block">
+  <input title="Clean Screen" type="submit" value="Clean"/>
+  &nbsp;
+  </form>
+
+<form action = "/exportar" method="POST" style="display:inline-block">
+  <input title="Export Screen" type="submit" value="Export"/>
+  &nbsp;
+  <select title="Export Filetype" name="type1" id="type1">
+    <option value="txt">txt</option>
+    <option value="py">py</option>
+  </select>
+  &nbsp;
+  </form>
+
+  <form action = "/edados" method="POST" style="display:inline-block" onclick="show_time(this)">
+    <input title="Show Variables" type="submit" value="Show"/>
+    &nbsp; 
+    </form>
+  
+  <form action = "/adados" method="POST" style="display:inline-block" onclick="show_time(this)">
+    <input title="Delete Variables" type="submit" value="Delete"/>
+    &nbsp; 
+    </form>
+          
+  <form action = "/download" method="POST" style="display:inline-block">
+    <input title="Save Variables" type="submit" value="Save"/>
+    &nbsp;
+    <select title="Save Filetype" name="type2" id="type2" onchange="show_sep(this)">
+      <option value="py">py</option>
+      <option value="pkl">pkl</option>
+      <option value="txt">txt</option>
+      <option value="csv">csv</option>
+    </select>
+    &nbsp;
+    <input id="sep" name="sep" spellcheck="false" maxlength="3" style="width:50; font:17px Monospace; display:none;" value="," autocomplete="off">
+    &nbsp;
+    </form>
+  
+   <img id="time" src="{{url_for('static', filename='ampulheta.gif')}}" alt="GIF" style="display:none">
+
+<br>
+
+<form action="/python" method="POST" enctype="multipart/form-data">
+  <div id="tela" style="height:715; width:1890; border:8px solid blue; font:25px Monospace; overflow:auto; display:flex; flex-direction:column-reverse; white-space:pre">
+    {{__tela}}
+  </div>
+  <br>
+  <input id="text" name="text" spellcheck="false" style="width:1906; font:35px Monospace" autocomplete="off" onchange="show_time(this)" autofocus>
+</form>
+
+</html>
