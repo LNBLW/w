@@ -3,18 +3,20 @@
 
   <script type="text/javascript">
 
-    function luis()
+    function show()
     {
-      __tela = 'asd';
+        name = document.getElementById("name").value
+        lang = document.getElementById("lang").value
+        document.getElementById("tela").textContent = document.getElementById(name+'_'+lang).textContent
     }
 
     function resize(event)
     {
       W = document.body.clientWidth-32;
-      H = document.body.clientHeight-280;
+      H = document.body.clientHeight-100;
       document.getElementById('tela').style.width = W
-      document.getElementById('text').style.width = W+16;
-      document.getElementById('tela').style.height = W>H ? H : W;
+      document.getElementById('tela').style.height = H;
+      show()
     }
 
     window.addEventListener('load', resize);
@@ -22,21 +24,9 @@
 
 </script>  
   <style>
-    button
-    {
-      font-size:17px;
-      font-weight: bold;
-      color:blue;
-    }
-    input
-    {
-      font-size:17px;
-      font-weight: bold;
-      color:blue;
-    }
     select
     {
-      font-size:19px;
+      font-size:20px;
       font-weight: bold;
       color:blue;
     }
@@ -44,20 +34,73 @@
 
 </head>
 
-<form action = "/luis" method="POST" style="display:inline-block" onclick="luis(this)">
-    <input type="submit" value="Luis Barreto"/>
-    &nbsp; 
-  </form>
+<form style="display:inline-block">
+    <select title="Name" name="name" id="name" onchange="show(this)">
+      <option value="luis">Luis Augusto Nery Barreto</option>
+      <option value="regina">Regina Maura Paes de Barros</option>
+    </select>
+</form>
 
-<form action = "/regina" method="POST" style="display:inline-block" onclick="regina(this)">
-  <input type="submit" value="Regina Barros" />
-  &nbsp; 
-  </form>
+
+<form style="display:inline-block">
+    <select title="Language" name="lang" id="lang" onchange="show(this)">
+      <option value="por">Português</option>
+      <option value="ing">English</option>
+      <option value="esp">Español</option>
+    </select>
+</form>
 
 <form action="/python" method="POST" enctype="multipart/form-data">
-  <div id="tela" style="height:715; width:1890; border:8px solid blue; font:25px Monospace; overflow:auto; display:flex; flex-direction:column-reverse; white-space:pre">
-    {{__tela}}
+  <div id="tela" style="height:715; width:1890; border:8px solid blue; font:20px Monospace; overflow:auto; display:flex; white-space:pre">
   </div>
+</form>
+
+<form enctype="multipart/form-data" style="display:none">
+    <div id="luis_por">
+ Luis Augusto Nery Barreto
+ <br>
+ Português
+    </div>
+</form>
+
+<form enctype="multipart/form-data" style="display:none">
+    <div id="luis_ing">
+ Luis Augusto Nery Barreto
+ <br>
+ Inglês
+    </div>
+</form>
+
+<form enctype="multipart/form-data" style="display:none">
+    <div id="luis_esp">
+ Luis Augusto Nery Barreto
+ <br>
+ Espanhol
+    </div>
+</form>
+
+<form enctype="multipart/form-data" style="display:none">
+  <div id="regina_por">
+ Regina Maura Paes de Barros
+ <br>
+ Português
+  </div>
+</form>
+
+<form enctype="multipart/form-data" style="display:none">
+    <div id="regina_ing">
+ Regina Maura Paes de Barros
+ <br>
+ Inglês
+    </div>
+</form>
+
+<form enctype="multipart/form-data" style="display:none">
+    <div id="regina_esp">
+ Regina Maura Paes de Barros
+ <br>
+ Espanhol
+    </div>
 </form>
 
 </html>
