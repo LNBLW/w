@@ -1,5 +1,26 @@
 <html lang="en" xml:lang="en">
 <head>
+
+  <script type="text/javascript">
+
+    function luis()
+    {
+      __tela = 'asd';
+    }
+
+    function resize(event)
+    {
+      W = document.body.clientWidth-32;
+      H = document.body.clientHeight-280;
+      document.getElementById('tela').style.width = W
+      document.getElementById('text').style.width = W+16;
+      document.getElementById('tela').style.height = W>H ? H : W;
+    }
+
+    window.addEventListener('load', resize);
+    window.addEventListener('resize', resize);
+
+</script>  
   <style>
     button
     {
@@ -23,12 +44,12 @@
 
 </head>
 
-<form action = "/luis" method="POST" style="display:inline-block" onclick="show_time(this)">
+<form action = "/luis" method="POST" style="display:inline-block" onclick="luis(this)">
     <input type="submit" value="Luis Barreto"/>
     &nbsp; 
   </form>
 
-<form action = "/regina" method="POST" style="display:inline-block" onclick="show_time(this)">
+<form action = "/regina" method="POST" style="display:inline-block" onclick="regina(this)">
   <input type="submit" value="Regina Barros" />
   &nbsp; 
   </form>
@@ -37,8 +58,6 @@
   <div id="tela" style="height:715; width:1890; border:8px solid blue; font:25px Monospace; overflow:auto; display:flex; flex-direction:column-reverse; white-space:pre">
     {{__tela}}
   </div>
-  <br>
-  <input id="text" name="text" spellcheck="false" style="width:1906; font:35px Monospace" autocomplete="off" onchange="show_time(this)" autofocus>
 </form>
 
 </html>
